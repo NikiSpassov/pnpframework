@@ -325,6 +325,10 @@ namespace PnP.Framework.Provisioning.Providers.Xml
                 throw new ArgumentNullException(nameof(stream));
             }
             var res = stream;
+            
+            //rewind the stream so prevent accidental 'Root element is missing.'
+            stream.Seek(0, SeekOrigin.Begin);
+            
             XDocument xml = XDocument.Load(stream);
 
             //find XInclude elements by XName
